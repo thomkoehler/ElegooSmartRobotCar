@@ -1,0 +1,5 @@
+{
+    "board": "arduino:avr:uno",
+    "sketch": "src/InfraRed/InfraRed.ino",
+    "port": "/dev/ttyACM0"
+}
