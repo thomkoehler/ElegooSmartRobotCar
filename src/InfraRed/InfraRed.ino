@@ -16,7 +16,7 @@
 #define RIGHT 16761405
 #define STOP 16712445
 
-#define INIT_SPEED 100
+#define INIT_SPEED 150
 
 class Drive
 {
@@ -65,7 +65,10 @@ public:
 
   void stop()
   {
-    setSpeed(0);
+    digitalWrite(IN1, LOW);
+    digitalWrite(IN2, LOW);
+    digitalWrite(IN3, LOW);
+    digitalWrite(IN4, LOW);
   }
 
   void setSpeed(int speed)
@@ -101,17 +104,24 @@ void loop()
     case FORWARD:
       drive.forward();
       break;
+
     case BACK:
       drive.back();
       break;
+
     case LEFT:
       drive.left();
       break;
+
     case RIGHT:
       drive.right();
       break;
-    default:
+
+    case STOP:
       drive.stop();
+      break;
+
+    default:
       break;
     }
   }
@@ -119,7 +129,7 @@ void loop()
   {
     if (millis() - preMillis > 500)
     {
-      drive.stop();
+      // drive.stop();
       preMillis = millis();
     }
   }
