@@ -1,5 +1,5 @@
 {
     "board": "arduino:avr:uno",
-    "sketch": "src/InfraRed/InfraRed.ino",
+    "sketch": "src/bluetooth_car/bluetooth_car.ino",
     "port": "/dev/ttyACM0"
 }
