@@ -1,23 +1,21 @@
 
-import bluepy.btle as btle
 from time import sleep
- 
-peripheral = btle.Peripheral("88:3F:4A:D9:16:A8")
+import signal
+import sys
+import BLESerial
 
-for uuid, service in peripheral.discoverServices().items():
-  print(f'{uuid} {service}')
+MAC = "88:3F:4A:D9:16:A8"
 
-service = peripheral.getServiceByUUID("0000ffe0-0000-1000-8000-00805f9b34fb")
-characteristic = service.getCharacteristics()[0]
+if __name__ == "__main__":
+    bleSerial = BLESerial.BLESerial(MAC, BLESerial.PrintDelegate())
 
+    def signalHandler(sig, frame):
+        print()
+        bleSerial.disconnect()
+        sys.exit(0)
 
-characteristic.write(bytes("2", "utf-8"))
-sleep(1.0)
-characteristic.write(bytes("8", "utf-8"))
-sleep(1.0)
-characteristic.write(bytes("5", "utf-8"))
+    signal.signal(signal.SIGINT, signalHandler)
 
-for i in range(100):
-  print(characteristic.read())
-
-peripheral.disconnect()
+    while True:
+        line = input(">")
+        bleSerial.write(bytes(line, "utf-8"))
