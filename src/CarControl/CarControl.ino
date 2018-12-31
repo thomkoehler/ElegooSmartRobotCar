@@ -1,6 +1,8 @@
 
 #include "IRremote.h"
+
 #include "Drive.h"
+#include "SerialCommand.h"
 
 #define RECV_PIN 12
 
@@ -14,6 +16,28 @@
 
 Drive drive;
 IRrecv irrecv(RECV_PIN);
+
+
+void forward();
+void back();
+
+CommandDef commandDefs[] = 
+{
+  {"forward", forward},
+  {"back", back},
+};
+
+SerialCommand serialCommand(sizeof(commandDefs) / sizeof(CommandDef), commandDefs);
+
+void forward()
+{
+
+}
+
+void back()
+{
+
+}
 
 void setup()
 {
