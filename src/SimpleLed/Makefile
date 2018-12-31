@@ -11,5 +11,5 @@ SimpleLed.hex: SimpleLed.elf
 SimpleLed.elf: SimpleLed.o
 	avr-ld -o $@ $^
 
-SimpleLed.o: SimpleLed.s
+SimpleLed.o: SimpleLed.asm
 	avr-as -g -mmcu=atmega328p -o $@ $^
