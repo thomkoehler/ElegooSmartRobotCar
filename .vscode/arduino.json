@@ -1,5 +1,5 @@
 {
     "board": "arduino:avr:uno",
-    "sketch": "src/bluetooth_car/bluetooth_car.ino",
+    "sketch": "src/CarControl/CarControl.ino",
     "port": "/dev/ttyACM0"
 }
