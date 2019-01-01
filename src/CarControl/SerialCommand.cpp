@@ -1,5 +1,6 @@
 
 #include "SerialCommand.h"
+
 #include <assert.h>
 
 #define LINE_BUFFER_SIZE 32
@@ -17,6 +18,12 @@ void readLineFromSerial(uint8_t bufLen, char *buf)
 
   while (1)
   {
+    if (ptr - buf > bufLen - 1)
+    {
+      *(ptr - 1) = '\0';
+      return;
+    }
+
     auto c = Serial.read();
     switch (Serial.read())
     {

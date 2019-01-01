@@ -1,5 +1,5 @@
 {
     "board": "arduino:avr:uno",
-    "sketch": "src/CarControl/CarControl.ino",
+    "sketch": "src/Obstacle_Avoidance_Car/Obstacle_Avoidance_Car.ino",
     "port": "/dev/ttyACM0"
 }
