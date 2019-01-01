@@ -14,10 +14,10 @@ struct CommandDef
 class SerialCommand
 {
 public:
-  SerialCommand(uint8_t defsCount, CommandDef *defs[]);
+  SerialCommand(size_t defsCount, CommandDef *defs);
   void run();
 
 private:
-  uint8_t _defsCount;
-  CommandDef *_defs[];
+  size_t _defsCount;
+  CommandDef *_defs;
 };
