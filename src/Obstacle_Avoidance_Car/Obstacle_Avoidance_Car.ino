@@ -12,7 +12,7 @@ int Trig = A5;
 #define IN3 9
 #define IN4 11
 #define ENA 6
-#define carSpeed 200
+#define carSpeed 150
 int rightDistance = 0, leftDistance = 0, middleDistance = 0;
 
 void forward(){
