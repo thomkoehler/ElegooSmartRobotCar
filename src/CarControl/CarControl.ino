@@ -4,11 +4,11 @@
 
 #define INIT_SPEED 150
 
-const char *CMD_FORWARD = "forward";
-const char *CMD_BACK = "back";
-const char *CMD_LEFT = "left";
-const char *CMD_RIGHT = "right";
-const char *CMD_STOP = "stop";
+const char *CMD_FORWARD = "f";
+const char *CMD_BACK = "b";
+const char *CMD_LEFT = "l";
+const char *CMD_RIGHT = "r";
+const char *CMD_STOP = "s";
 
 Drive drive;
 

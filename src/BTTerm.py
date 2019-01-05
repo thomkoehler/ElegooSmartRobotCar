@@ -18,4 +18,4 @@ if __name__ == "__main__":
 
     while True:
         line = input(">")
-        bleSerial.write(bytes(line, "utf-8"))
+        bleSerial.write(bytes(line + "\n", "utf-8"))

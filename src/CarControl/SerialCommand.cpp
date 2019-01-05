@@ -19,13 +19,15 @@ void readLineFromSerial(ptrdiff_t bufLen, char *buf)
     if (Serial.available() > 0)
     {
       auto c = Serial.read();
-      switch (Serial.read())
+      switch (c)
       {
       case '\0':
+      case '\t':
       case '\r':
+        break;
+
       case '\n':
         *ptr = '\0';
-        Serial.println(ptr);
         return;
 
       default:
