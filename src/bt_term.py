@@ -2,12 +2,12 @@
 from time import sleep
 import signal
 import sys
-import BLESerial
+import ble_serial
 
 MAC = "88:3F:4A:D9:16:A8"
 
 if __name__ == "__main__":
-    bleSerial = BLESerial.BLESerial(MAC, BLESerial.PrintDelegate())
+    bleSerial = ble_serial.BLESerial(MAC, ble_serial.PrintDelegate())
 
     def signalHandler(sig, frame):
         print()
