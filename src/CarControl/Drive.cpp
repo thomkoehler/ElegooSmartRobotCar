@@ -8,7 +8,7 @@
 #define IN4 11
 #define ENA 6
 
-void Drive::init()
+void Drive::init(uint8_t initSpeed)
 {
   pinMode(IN1, OUTPUT);
   pinMode(IN2, OUTPUT);
@@ -16,6 +16,8 @@ void Drive::init()
   pinMode(IN4, OUTPUT);
   pinMode(ENA, OUTPUT);
   pinMode(ENB, OUTPUT);
+
+  speed(initSpeed);
 }
 
 void Drive::forward()
@@ -62,4 +64,11 @@ void Drive::speed(uint8_t val)
 {
   analogWrite(ENB, val);
   analogWrite(ENA, val);
+
+  _speed = val;
+}
+
+uint8_t Drive::speed() const
+{
+  return _speed;
 }

@@ -11,6 +11,7 @@ const char *CMD_CCW = "ccw";
 const char *CMD_CW = "cw";
 const char *CMD_STOP = "st";
 const char *CMD_SET_SPEED = "ss";
+const char *CMD_GET_SPEED = "gs";
 
 Drive drive;
 
@@ -20,6 +21,7 @@ void ccw(int argc, char *argv[]);
 void cw(int argc, char *argv[]);
 void stop(int argc, char *argv[]);
 void setSpeed(int argc, char *argv[]);
+void getSpeed(int argc, char *argv[]);
 
 CommandDef commandDefs[] =
 {
@@ -29,15 +31,14 @@ CommandDef commandDefs[] =
     {CMD_CW, cw},
     {CMD_STOP, stop},
     {CMD_SET_SPEED, setSpeed},
+    {CMD_GET_SPEED, getSpeed}
 };
 
 SerialCommand serialCommand(sizeof(commandDefs) / sizeof(CommandDef), commandDefs);
 
 void setup()
 {
-  drive.init();
-  drive.speed(INIT_SPEED);
-
+  drive.init(INIT_SPEED);
   Serial.begin(9600);
 }
 
@@ -81,5 +82,12 @@ void setSpeed(int argc, char *argv[])
   if (argc > 1)
   {
     drive.speed(strToUint<uint8_t>(argv[1]));
+    Serial.println(CMD_SET_SPEED);
   }
+}
+
+void getSpeed(int argc, char *argv[])
+{
+  Serial.print("sp: ");
+  Serial.println(drive.speed(), DEC);
 }
