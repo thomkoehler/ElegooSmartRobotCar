@@ -1,4 +1,6 @@
 
+#include "Str.h"
+
 size_t tokenize(char *str, size_t maxTokenCount, char *tokens[])
 {
   bool inToken = false;
@@ -51,4 +53,9 @@ size_t tokenize(char *str, size_t maxTokenCount, char *tokens[])
 
     ++str;
   }
+}
+
+inline bool isDigit(char c)
+{
+  return c >= '0' && c <= '9';
 }
