@@ -9,8 +9,8 @@ public:
   void init();
   void forward();
   void back();
-  void left();
-  void right();
+  void ccw();
+  void cw();
   void stop();
   void speed(uint8_t speed);
 };

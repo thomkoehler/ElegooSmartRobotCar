@@ -1,14 +1,15 @@
 
 #include "SerialCommand.h"
-
-#include <assert.h>
+#include "Str.h"
 
 #define LINE_BUFFER_SIZE 32
+#define ARGUMENT_SIZE 4
 
 namespace
 {
 
 char lineBuffer[LINE_BUFFER_SIZE];
+char *arguments[ARGUMENT_SIZE];
 
 void readLineFromSerial(ptrdiff_t bufLen, char *buf)
 {
@@ -22,10 +23,6 @@ void readLineFromSerial(ptrdiff_t bufLen, char *buf)
       switch (c)
       {
       case '\0':
-      case '\t':
-      case '\r':
-        break;
-
       case '\n':
         *ptr = '\0';
         return;
@@ -53,13 +50,17 @@ SerialCommand::SerialCommand(size_t defsCount, CommandDef *defs)
 void SerialCommand::run()
 {
   readLineFromSerial(LINE_BUFFER_SIZE, lineBuffer);
+  size_t argumentCount = tokenize(lineBuffer, ARGUMENT_SIZE, arguments);
 
-  for (size_t i = 0; i < _defsCount; ++i)
+  if (argumentCount > 0)
   {
-    if (strcmp(lineBuffer, _defs[i]._name) == 0)
+    for (size_t i = 0; i < _defsCount; ++i)
     {
-      _defs[i]._callback();
-      break;
+      if (strcmp(arguments[0], _defs[i]._name) == 0)
+      {
+        _defs[i]._callback(argumentCount, arguments);
+        break;
+      }
     }
   }
 }

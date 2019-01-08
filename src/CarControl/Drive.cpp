@@ -34,7 +34,7 @@ void Drive::back()
   digitalWrite(IN4, LOW);
 }
 
-void Drive::left()
+void Drive::ccw()
 {
   digitalWrite(IN1, LOW);
   digitalWrite(IN2, HIGH);
@@ -42,7 +42,7 @@ void Drive::left()
   digitalWrite(IN4, HIGH);
 }
 
-void Drive::right()
+void Drive::cw()
 {
   digitalWrite(IN1, HIGH);
   digitalWrite(IN2, LOW);

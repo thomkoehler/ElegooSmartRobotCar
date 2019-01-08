@@ -8,7 +8,7 @@ class SerialCommand;
 struct CommandDef
 {
   const char *_name;
-  void (*_callback)();
+  void (*_callback)(int argc, char *argv[]);
 };
 
 class SerialCommand

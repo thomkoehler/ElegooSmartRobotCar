@@ -3,7 +3,8 @@
 
 #include "Arduino.h"
 
-bool isDigit(char c);
+#define IS_DIGIT(c) (c >= '0' && c <= '9')
+
 size_t tokenize(char *str, size_t maxTokenCount, char *tokens[]);
 
 template <typename T>
@@ -11,7 +12,7 @@ T strToUint(const char *str)
 {
   T val = T();
 
-  while (isDigit(*str))
+  while (IS_DIGIT(*str))
   {
     val = val * static_cast<T>(10) + static_cast<T>(*str++ - '0');
   }

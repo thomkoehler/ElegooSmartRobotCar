@@ -1,30 +1,34 @@
 
 #include "Drive.h"
 #include "SerialCommand.h"
+#include "Str.h"
 
 #define INIT_SPEED 150
 
-const char *CMD_FORWARD = "f";
-const char *CMD_BACK = "b";
-const char *CMD_LEFT = "l";
-const char *CMD_RIGHT = "r";
-const char *CMD_STOP = "s";
+const char *CMD_FORWARD = "fw";
+const char *CMD_BACKWARD = "bw";
+const char *CMD_CCW = "ccw";
+const char *CMD_CW = "cw";
+const char *CMD_STOP = "st";
+const char *CMD_SET_SPEED = "ss";
 
 Drive drive;
 
-void forward();
-void back();
-void left();
-void right();
-void stop();
+void forward(int argc, char *argv[]);
+void backward(int argc, char *argv[]);
+void ccw(int argc, char *argv[]);
+void cw(int argc, char *argv[]);
+void stop(int argc, char *argv[]);
+void setSpeed(int argc, char *argv[]);
 
 CommandDef commandDefs[] =
 {
     {CMD_FORWARD, forward},
-    {CMD_BACK, back},
-    {CMD_LEFT, left},
-    {CMD_RIGHT, right},
-    {CMD_STOP, stop}
+    {CMD_BACKWARD, backward},
+    {CMD_CCW, ccw},
+    {CMD_CW, cw},
+    {CMD_STOP, stop},
+    {CMD_SET_SPEED, setSpeed},
 };
 
 SerialCommand serialCommand(sizeof(commandDefs) / sizeof(CommandDef), commandDefs);
@@ -42,32 +46,40 @@ void loop()
   serialCommand.run();
 }
 
-void forward()
+void forward(int argc, char *argv[])
 {
   drive.forward();
   Serial.println(CMD_FORWARD);
 }
 
-void back()
+void backward(int argc, char *argv[])
 {
   drive.back();
-  Serial.println(CMD_BACK);
+  Serial.println(CMD_BACKWARD);
 }
 
-void left()
+void ccw(int argc, char *argv[])
 {
-  drive.left();
-  Serial.println(CMD_LEFT);
+  drive.ccw();
+  Serial.println(CMD_CCW);
 }
 
-void right()
+void cw(int argc, char *argv[])
 {
-  drive.right();
-  Serial.println(CMD_RIGHT);
+  drive.cw();
+  Serial.println(CMD_CW);
 }
 
-void stop()
+void stop(int argc, char *argv[])
 {
   drive.stop();
   Serial.println(CMD_STOP);
+}
+
+void setSpeed(int argc, char *argv[])
+{
+  if (argc > 1)
+  {
+    drive.speed(strToUint<uint8_t>(argv[1]));
+  }
 }
