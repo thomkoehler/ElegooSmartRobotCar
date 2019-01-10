@@ -13,6 +13,9 @@ const char *CMD_CW = "cw";
 const char *CMD_STOP = "st";
 const char *CMD_SET_SPEED = "ss";
 const char *CMD_GET_SPEED = "gs";
+const char *CMD_SET_DIST_POS = "sdp";
+const char *CMD_GET_DIST_POS = "gdp";
+const char *CMD_GET_DIST = "gd";
 
 Drive drive;
 DistanceDetection distanceDetection;
@@ -24,6 +27,9 @@ void cw(int argc, char *argv[]);
 void stop(int argc, char *argv[]);
 void setSpeed(int argc, char *argv[]);
 void getSpeed(int argc, char *argv[]);
+void setDistPos(int argc, char *argv[]);
+void getDistPos(int argc, char *argv[]);
+void getDist(int argc, char *argv[]);
 
 CommandDef commandDefs[] =
 {
@@ -33,7 +39,10 @@ CommandDef commandDefs[] =
     {CMD_CW, cw},
     {CMD_STOP, stop},
     {CMD_SET_SPEED, setSpeed},
-    {CMD_GET_SPEED, getSpeed}
+    {CMD_GET_SPEED, getSpeed},
+    {CMD_SET_DIST_POS, setDistPos},
+    {CMD_GET_DIST_POS, getDistPos},
+    {CMD_GET_DIST, getDist},
 };
 
 SerialCommand serialCommand(sizeof(commandDefs) / sizeof(CommandDef), commandDefs);
@@ -84,7 +93,7 @@ void setSpeed(int argc, char *argv[])
 {
   if (argc > 1)
   {
-    drive.speed(strToUint<uint8_t>(argv[1]));
+    drive.speed(int(argv[1]));
     Serial.println(CMD_SET_SPEED);
   }
 }
@@ -93,4 +102,24 @@ void getSpeed(int argc, char *argv[])
 {
   Serial.print("sp: ");
   Serial.println(drive.speed(), DEC);
+}
+
+void setDistPos(int argc, char *argv[])
+{
+  if (argc > 1)
+  {
+    distanceDetection.servoPosition(int(argv[1]));
+  }
+}
+
+void getDistPos(int argc, char *argv[])
+{
+  Serial.print("dp: ");
+  Serial.println(distanceDetection.servoPosition(), DEC);
+}
+
+void getDist(int argc, char *argv[])
+{
+  Serial.print("d: ");
+  Serial.println(distanceDetection.distance(), DEC);
 }
