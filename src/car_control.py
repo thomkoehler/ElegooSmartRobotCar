@@ -21,8 +21,8 @@ class CarControl:
     def stop(self):
         self._bleSerial.write(bytes("st\n", "utf-8"))
 
-    def setSpeed(self, speed)
+    def setSpeed(self, speed):
         self._bleSerial.write(bytes(f"ss {speed}\n", "utf-8"))
 
-    def setDistanceDetectionPos(self, pos)
+    def setDistanceDetectionPos(self, pos):
         self._bleSerial.write(bytes(f"sdp {pos}\n", "utf-8"))

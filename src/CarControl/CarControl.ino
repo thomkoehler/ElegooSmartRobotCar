@@ -59,31 +59,31 @@ void loop()
   serialCommand.run();
 }
 
-void forward(int argc, char *argv[])
+void forward(int, char *[])
 {
   drive.forward();
   Serial.println(CMD_FORWARD);
 }
 
-void backward(int argc, char *argv[])
+void backward(int, char *[])
 {
   drive.back();
   Serial.println(CMD_BACKWARD);
 }
 
-void ccw(int argc, char *argv[])
+void ccw(int, char *[])
 {
   drive.ccw();
   Serial.println(CMD_CCW);
 }
 
-void cw(int argc, char *argv[])
+void cw(int, char *[])
 {
   drive.cw();
   Serial.println(CMD_CW);
 }
 
-void stop(int argc, char *argv[])
+void stop(int, char *[])
 {
   drive.stop();
   Serial.println(CMD_STOP);
@@ -93,12 +93,12 @@ void setSpeed(int argc, char *argv[])
 {
   if (argc > 1)
   {
-    drive.speed(int(argv[1]));
+    drive.speed(strToUint<uint8_t>(argv[1]));
     Serial.println(CMD_SET_SPEED);
   }
 }
 
-void getSpeed(int argc, char *argv[])
+void getSpeed(int, char *[])
 {
   Serial.print("sp: ");
   Serial.println(drive.speed(), DEC);
@@ -108,17 +108,17 @@ void setDistPos(int argc, char *argv[])
 {
   if (argc > 1)
   {
-    distanceDetection.servoPosition(int(argv[1]));
+    distanceDetection.servoPosition(strToUint<int>(argv[1]));
   }
 }
 
-void getDistPos(int argc, char *argv[])
+void getDistPos(int, char *[])
 {
   Serial.print("dp: ");
   Serial.println(distanceDetection.servoPosition(), DEC);
 }
 
-void getDist(int argc, char *argv[])
+void getDist(int, char *[])
 {
   Serial.print("d: ");
   Serial.println(distanceDetection.distance(), DEC);
