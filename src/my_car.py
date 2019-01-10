@@ -1,6 +1,6 @@
 
 from PyQt5.QtCore import Qt
-from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QGridLayout, QSlider
+from PyQt5.QtWidgets import QApplication, QDialog, QPushButton, QGridLayout, QSlider
 
 # from car_control import CarControl
 from car_control_mock import CarControl
@@ -46,7 +46,8 @@ speedSlider.setValue(INIT_SPEED)
 carControl.setSpeed(INIT_SPEED)
 layout.addWidget(speedSlider, 3, 0)
 
-window = QWidget()
+window = QDialog()
+window.setWindowTitle('My Car')
 window.setLayout(layout)
 window.show()
 
