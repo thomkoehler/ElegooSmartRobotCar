@@ -1,5 +1,6 @@
 
 #include "Drive.h"
+#include "DistanceDetection.h"
 #include "SerialCommand.h"
 #include "Str.h"
 
@@ -14,6 +15,7 @@ const char *CMD_SET_SPEED = "ss";
 const char *CMD_GET_SPEED = "gs";
 
 Drive drive;
+DistanceDetection distanceDetection;
 
 void forward(int argc, char *argv[]);
 void backward(int argc, char *argv[]);
@@ -39,6 +41,7 @@ SerialCommand serialCommand(sizeof(commandDefs) / sizeof(CommandDef), commandDef
 void setup()
 {
   drive.init(INIT_SPEED);
+  distanceDetection.init();
   Serial.begin(9600);
 }
 
