@@ -4,7 +4,8 @@
 #include "SerialCommand.h"
 #include "Str.h"
 
-#define INIT_SPEED 150
+const uint8_t INIT_SPEED = 150;
+const uint8_t INIT_ROT_SPEED = 150;
 
 const char *CMD_FORWARD = "fw";
 const char *CMD_BACKWARD = "bw";
@@ -49,7 +50,7 @@ SerialCommand serialCommand(sizeof(commandDefs) / sizeof(CommandDef), commandDef
 
 void setup()
 {
-  drive.init(INIT_SPEED);
+  drive.init(INIT_SPEED, INIT_ROT_SPEED);
   distanceDetection.init();
   Serial.begin(9600);
 }

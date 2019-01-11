@@ -3,10 +3,9 @@
 
 #include "DistanceDetection.h"
 
-#define SERVO_PIN 3
-
-const int ECHO = A4;
-const int TRIG = A5;
+const int SERVO_PIN = 3;
+const uint8_t ECHO = A4;
+const uint8_t TRIG = A5;
 
 void DistanceDetection::init()
 {

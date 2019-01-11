@@ -34,10 +34,10 @@ class CarControl:
         self._bleSerial.write(bytes("gd\n", "utf-8"))
         for _ in range(3):
             item = self._inQueue.read()
-                if item is not None:
-                    return item
+            if item is not None:
+                return item
 
-                sleep(0.1)
-                self._bleSerial.write(bytes("\n"))
+            sleep(0.1)
+            self._bleSerial.write(bytes("\n"))
 
         return None
