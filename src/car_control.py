@@ -1,10 +1,12 @@
 
-from ble_serial import BLESerial
+from ble_serial import BLESerial, QueueDelegate
+from time import sleep
 
 
 class CarControl:
     def __init__(self, mac):
-        self._bleSerial = BLESerial(mac)
+        self._inQueue = QueueDelegate()
+        self._bleSerial = BLESerial(mac, self._inQueue)
 
     def forward(self):
         self._bleSerial.write(bytes("fw\n", "utf-8"))
@@ -26,3 +28,16 @@ class CarControl:
 
     def setDistanceDetectionPos(self, pos):
         self._bleSerial.write(bytes(f"sdp {pos}\n", "utf-8"))
+
+    def getDistance(self):
+        self._inQueue.clear()
+        self._bleSerial.write(bytes("gd\n", "utf-8"))
+        for _ in range(3):
+            item = self._inQueue.read()
+                if item is not None:
+                    return item
+
+                sleep(0.1)
+                self._bleSerial.write(bytes("\n"))
+
+        return None

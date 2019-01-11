@@ -20,3 +20,10 @@ class CarControl:
 
     def setSpeed(self, speed):
         print(f"ss {speed}\n")
+
+    def setDistanceDetectionPos(self, pos):
+        print(f"sdp {pos}\n\n")
+
+    def getDistance(self):
+        print("gd\n")
+        return 0
