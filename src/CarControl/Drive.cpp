@@ -10,6 +10,9 @@
 
 void Drive::init(uint8_t speed, uint8_t rotSpeed)
 {
+  _speed = speed;
+  _rotSpeed = rotSpeed;
+
   pinMode(IN1, OUTPUT);
   pinMode(IN2, OUTPUT);
   pinMode(IN3, OUTPUT);

@@ -2,8 +2,8 @@
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QApplication, QDialog, QPushButton, QGridLayout, QSlider, QLabel, QVBoxLayout, QWidget
 
-# from car_control import CarControl
-from car_control_mock import CarControl
+from car_control import CarControl
+# from car_control_mock import CarControl
 
 MAC = "88:3F:4A:D9:16:A8"
 INIT_SPEED = 0
@@ -40,7 +40,7 @@ class MyCarWindow(QDialog):
 
         layout.addWidget(self._createSpeedSlider(), 3, 0)
         layout.addWidget(self._createDDPosSlider(), 3, 1)
-
+        layout.addWidget(self._createDistButton(), 3, 2)
 
         self.setWindowTitle('My Car')
         self.setLayout(layout)
@@ -55,7 +55,8 @@ class MyCarWindow(QDialog):
         speedSlider.setSingleStep(1)
         speedSlider.setMinimum(0)
         speedSlider.setMaximum(255)
-        speedSlider.valueChanged.connect(lambda: self._onSpeedChanged(speedSlider))
+        speedSlider.valueChanged.connect(
+            lambda: self._onSpeedChanged(speedSlider))
         speedSlider.setValue(INIT_SPEED)
 
         self._carControl.setSpeed(INIT_SPEED)
@@ -82,7 +83,8 @@ class MyCarWindow(QDialog):
         ddPosSlider.setSingleStep(5)
         ddPosSlider.setMinimum(45)
         ddPosSlider.setMaximum(135)
-        ddPosSlider.valueChanged.connect(lambda: self._onDDPosChanged(ddPosSlider))
+        ddPosSlider.valueChanged.connect(
+            lambda: self._onDDPosChanged(ddPosSlider))
         ddPosSlider.setValue(INIT_DD_POS)
 
         self._carControl.setDistanceDetectionPos(INIT_DD_POS)
@@ -98,6 +100,24 @@ class MyCarWindow(QDialog):
         val = 180 - ddPosSlider.value()
         self._carControl.setDistanceDetectionPos(val)
         self._ddPosLabel.setText(str(val))
+
+    def _createDistButton(self):
+        distLabel = QLabel("???")
+
+        getDistButton = QPushButton('Get distance')
+        getDistButton.clicked.connect(lambda: self._onGetDistButtonPressed(distLabel))
+
+        layout = QVBoxLayout()
+        layout.addWidget(getDistButton)
+        layout.addWidget(distLabel)
+        widget = QWidget()
+        widget.setLayout(layout)
+        return widget
+
+    def _onGetDistButtonPressed(self, distLabel):
+        dist = self._carControl.getDistance()
+        distLabel.setText(str(dist))
+        pass
 
 
 app = QApplication([])
