@@ -2,8 +2,7 @@
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QApplication, QDialog, QPushButton, QGridLayout, QSlider, QLabel, QVBoxLayout, QWidget
 
-from car_control import CarControl
-# from car_control_mock import CarControl
+import car_control
 
 MAC = "88:3F:4A:D9:16:A8"
 INIT_SPEED = 0
@@ -121,6 +120,6 @@ class MyCarWindow(QDialog):
 
 
 app = QApplication([])
-window = MyCarWindow(CarControl(MAC))
+window = MyCarWindow(car_control.CarControl(MAC))
 window.show()
 app.exec_()

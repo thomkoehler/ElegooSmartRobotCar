@@ -1,5 +1,5 @@
 
-class CarControl:
+class CarControlMock:
     def __init__(self, mac):
         pass
 
