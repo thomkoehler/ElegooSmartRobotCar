@@ -6,3 +6,8 @@
 
 .vscode/c_cpp_properties.json
 .vscode/settings.json
+
+**/build
+**/dist
+
+python/car_control.egg-info
