@@ -35,7 +35,9 @@ class CarControl:
         for _ in range(3):
             item = self._inQueue.read()
             if item is not None:
-                return item
+                tokens = item.split()
+                if len(tokens) > 1 and tokens[0] == "d:":
+                    return int(tokens[1])
 
             sleep(0.1)
             self._bleSerial.write(bytes("\n"))
