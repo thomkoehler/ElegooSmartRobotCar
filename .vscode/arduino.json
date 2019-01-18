@@ -1,5 +1,5 @@
 {
     "board": "arduino:avr:uno",
-    "sketch": "sketch\car_control\CarControl.ino",
+    "sketch": "sketch/car_control/car_control.ino",
     "port": "/dev/ttyACM0"
 }
