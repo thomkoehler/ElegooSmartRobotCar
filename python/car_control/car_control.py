@@ -1,6 +1,6 @@
 
-from ble_serial import BLESerial, QueueDelegate
 from time import sleep
+from .ble_serial import QueueDelegate, BLESerial
 
 
 class CarControl:
