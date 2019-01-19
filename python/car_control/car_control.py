@@ -32,14 +32,16 @@ class CarControl:
     def getDistance(self):
         self._inQueue.clear()
         self._bleSerial.write(bytes("gd\n", "utf-8"))
-        for _ in range(3):
+        for _ in range(4):
             item = self._inQueue.read()
             if item is not None:
                 tokens = item.split()
-                if len(tokens) > 1 and tokens[0] == "d:":
+                print(tokens)
+
+                if len(tokens) > 1 and tokens[0] == b'd:':
                     return int(tokens[1])
 
             sleep(0.1)
-            self._bleSerial.write(bytes("\n"))
+            self._bleSerial.write(bytes("\n", "utf-8"))
 
         return None
