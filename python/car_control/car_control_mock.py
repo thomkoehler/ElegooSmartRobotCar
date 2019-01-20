@@ -27,3 +27,7 @@ class CarControlMock:
     def getDistance(self):
         print("gd\n")
         return 0
+
+    def getSpeed(self):
+        print("gs\n")
+        return 0

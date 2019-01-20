@@ -30,18 +30,22 @@ class CarControl:
         self._bleSerial.write(bytes(f"sdp {pos}\n", "utf-8"))
 
     def getDistance(self):
+        return self._getIntValue('gd', b'd:')
+
+    def getSpeed(self):
+        return self._getIntValue('gs', b'sp:')
+
+    def _getIntValue(self, command, getToken):
         self._inQueue.clear()
-        self._bleSerial.write(bytes("gd\n", "utf-8"))
+        self._bleSerial.write(bytes(f"{command}\n", "utf-8"))
         for _ in range(4):
             item = self._inQueue.read()
             if item is not None:
                 tokens = item.split()
-                print(tokens)
-
-                if len(tokens) > 1 and tokens[0] == b'd:':
+                if len(tokens) > 1 and tokens[0] == getToken:
                     return int(tokens[1])
 
-            sleep(0.1)
+            sleep(0.2)
             self._bleSerial.write(bytes("\n", "utf-8"))
 
         return None
